@@ -1,0 +1,9 @@
+#!/command/with-contenv bash
+
+ADMIN_PASS=${ADMIN_PASS:-""}
+ADMIN_USER=${ADMIN_USER:-""}
+CONFIG_PATH=${CONFIG_PATH:-"/config/"}
+DATA_PATH=${DATA_PATH:-"/data/"}
+LISTEN_IP=${LISTEN_IP:-"0.0.0.0"}
+LISTEN_PORT=${LISTEN_PORT:-"6052"}
+LOG_PATH=${LOG_PATH:-"/logs/"}

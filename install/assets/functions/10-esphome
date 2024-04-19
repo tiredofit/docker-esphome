@@ -1,0 +1,18 @@
+bootstrap_filesystem() {
+    if [ ! -d "${CONFIG_PATH}" ]; then
+        mkdir -p "${CONFIG_PATH}"
+    fi
+    if [ "$(stat -c %U "${CONFIG_PATH}")" != "root" ] ; then chown -R root:root "${CONFIG_PATH}" ; fi
+
+    if [ ! -d "${DATA_PATH}" ]; then
+        mkdir -p "${DATA_PATH}"
+    fi
+    if [ "$(stat -c %U "${DATA_PATH}")" != "root" ] ; then chown root:root "${DATA_PATH}" ; fi
+
+    if [ ! -d "${LOG_PATH}" ]; then
+        mkdir -p "${LOG_PATH}"
+    fi
+    if [ "$(stat -c %U "${LOG_PATH}")" != "root" ] ; then chown -R root:root "${LOG_PATH}" ; fi
+
+
+}
