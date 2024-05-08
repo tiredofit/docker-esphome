@@ -1,9 +1,9 @@
-# github.com/tiredofit/temp
+# github.com/tiredofit/esphome
 
 [![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-esphome?style=flat-square)](https://github.com/tiredofit/docker-esphome/releases)
 [![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-esphome/build?style=flat-square)](https://github.com/tiredofit/docker-esphome/actions?query=workflow%3Abuild)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/temp.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/temp/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/temp.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/temp/)
+[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/esphome.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/esphome/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/esphome.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/esphome/)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
 [![Paypal Donate](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square)](https://www.paypal.me/tiredofit)
 
@@ -83,8 +83,8 @@ The following directories are used for configuration and can be mapped for persi
 
 | Directory  | Description          |
 | ---------- | -------------------- |
+| `/cache/`   | Data                |
 | `/config/` | Configuration folder |
-| `/data/`   | Data                 |
 | `/logs`    | Logs                 |
 
 * * *
