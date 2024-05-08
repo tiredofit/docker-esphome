@@ -1,0 +1,35 @@
+bootstrap_filesystem() {
+    if [ ! -d "${CACHE_PATH}" ]; then
+        mkdir -p "${CACHE_PATH}"
+    fi
+    if [ "$(stat -c %U "${CACHE_PATH}")" != "${ESPHOME_USER}" ] ; then chown "${ESPHOME_USER}":"${ESPHOME_GROUP}" "${CACHE_PATH}" ; fi
+    ln -sf "${CACHE_PATH}" /var/lib/esphome
+
+    if [ ! -d "${CONFIG_PATH}" ]; then
+        mkdir -p "${CONFIG_PATH}"
+    fi
+    if [ "$(stat -c %U "${CONFIG_PATH}")" != "${ESPHOME_USER}" ] ; then chown -R "${ESPHOME_USER}":"${ESPHOME_GROUP}" "${CONFIG_PATH}" ; fi
+
+    if [ ! -d "${LOG_PATH}" ]; then
+        mkdir -p "${LOG_PATH}"
+    fi
+    if [ "$(stat -c %U "${LOG_PATH}")" != "${ESPHOME_USER}" ] ; then chown -R "${ESPHOME_USER}":"${ESPHOME_GROUP}" "${LOG_PATH}" ; fi
+}
+
+configure_logging() {
+    if [ "${LOG_TYPE,,}" = "file" ] || [ "${LOG_TYPE,,}" = "both" ]; then
+        create_logrotate esphome "${LOG_PATH}"/"${LOG_FILE}" esphome "${ESPHOME_USER}" "${ESPHOME_GROUP}"
+    fi
+}
+
+configure_proxy() {
+    if var_false "${ENABLE_NGINX}" ; then
+    	print_warn "Disabling Nginx - Using ESPHome in place server - Be sure to set Authentication!"
+	    service_stop 10-nginx
+    else
+        sed -i \
+                -e "s|{{LISTEN_PORT}}|${LISTEN_PORT}|g" \
+                -e "s|{{PROXY_PORT}}|${PROXY_PORT}|g" \
+            /etc/nginx/sites.available/"${NGINX_SITE_ENABLED}".conf
+    fi
+}

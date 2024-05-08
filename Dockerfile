@@ -1,18 +1,26 @@
 ARG DISTRO=alpine
 ARG DISTRO_VARIANT=3.19
 
-FROM docker.io/tiredofit/${DISTRO}:${DISTRO_VARIANT}
+FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION
 
-ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.4.0"} \
+ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.4.2"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
+    NGINX_SITE_ENABLED=esphome \
+    NGINX_WEBROOT=/var/lib/nginx/wwwroot \
+    NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
+    NGINX_LOG_ACCESS_LOCATION=/logs/nginx \
+    NGINX_LOG_ERROR_LOCATION=/logs/nginx \
+    NGINX_WORKER_PROCESSES=1 \
     IMAGE_NAME="tiredofit/esphome" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-esphome"
 
 RUN source /assets/functions/00-container && \
     set -x && \
+    addgroup -g 6052 esphome && \
+    adduser -S -D -G esphome -u 6052 -h /var/lib/esphome/ -H esphome && \
     package update && \
     package upgrade && \
     package install .esphome-build-deps \
@@ -33,6 +41,9 @@ RUN source /assets/functions/00-container && \
                     .esphome-build-deps \
                     && \
     package cleanup && \
-    rm -rf /usr/src/esphome
+    rm -rf \
+            /root/.cache \
+            /usr/src/esphome \
+            /var/lib/esphome
 
 ADD install/ /

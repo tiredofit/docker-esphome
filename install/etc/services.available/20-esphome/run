@@ -1,0 +1,44 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults single
+PROCESS_NAME="esphome"
+
+check_container_initialized
+check_service_initialized init
+
+if [ -n "${ADMIN_USER}" ] && [ -n "${ADMIN_PASS}" ]; then
+    _esphome_admin_credentials="--username ${ADMIN_USER} --password ${ADMIN_PASS}"
+fi
+
+case "${LOG_TYPE,,}" in
+    both )
+        SHOW_OUTPUT=TRUE
+        touch "${LOG_PATH}"/"${LOG_FILE}"
+        chown -R "${ESPHOME_USER}" "${LOG_PATH}"/"${LOG_FILE}"
+    ;;
+    console )
+        SHOW_OUTPUT=TRUE
+        LOG_PATH=/dev
+        LOG_FILE=/null
+    ;;
+    file )
+        SHOW_OUTPUT=FALSE
+        touch "${LOG_PATH}"/"${LOG_FILE}"
+        chown -R "${ESPHOME_USER}" "${LOG_PATH}"/"${LOG_FILE}"
+    ;;
+    none )
+        SHOW_OUTPUT=FALSE
+        LOG_PATH=/dev
+        LOG_FILE=null
+    ;;
+esac
+
+liftoff
+print_start "Starting ESPHome ${ESPHOME_VERSION}"
+s6-setuidgid "${ESPHOME_USER}" \
+                                    esphome \
+                                            dashboard \
+                                            --address "${LISTEN_IP}" \
+                                            --port "${LISTEN_PORT}" \
+                                            ${_esphome_admin_credentials} "${CONFIG_PATH}" 2>&1 1>> "${LOG_PATH}"/"${LOG_FILE}"|  silent sudo -u esphome tee -a "${LOG_PATH}"/"${LOG_FILE}"

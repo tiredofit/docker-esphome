@@ -1,3 +1,12 @@
+## 1.0.0 2024-05-08 <dave at tiredofit dot ca>
+
+   ### Added
+      - ESPHome 2024.04.2
+      - Use tiredofit/nginx for proxy purposes
+      - Logging improvements (file,console,both,none)
+      - Rework some volumes
+
+
 ## 0.0.1 2024-04-19 <dave at tiredofit dot ca>
 
    ### Added

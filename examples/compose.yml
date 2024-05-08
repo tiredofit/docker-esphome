@@ -1,0 +1,27 @@
+services:
+
+  esphome-app:
+    image: tiredofit/esphome:latest
+    container_name: esphome-app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.esphome-app.rule=Host(`esphome.example.com`)
+      - traefik.http.services.esphome-app.loadbalancer.server.port=80
+    volumes:
+      - ./cache:/cache
+      - ./config:/config
+      - ./logs:/logs
+    environment:
+      - TIMEZONE=America/Vancouver
+      - CONTAINER_NAME=esphome-app
+
+      - ENABLE_NGINX=TRUE
+      - ADMIN_USER=esphome
+      - ADMIN_PASS=tiredofit
+    networks:
+      - services
+    restart: always
+
+networks:
+  services:
+    external: true
