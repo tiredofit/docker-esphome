@@ -30,6 +30,7 @@ RUN source /assets/functions/00-container && \
     package install .esphome-run-deps \
                     gcompat \
                     python3 \
+                    py3-ruamel.yaml \
                     py3-setuptools \
                     && \
     clone_git_repo "${ESPHOME_REPO_URL}" "${ESPHOME_VERSION}" /usr/src/esphome && \
