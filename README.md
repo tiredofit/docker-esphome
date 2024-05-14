@@ -110,7 +110,9 @@ Be sure to view the following repositories to understand all the customizable op
 | `ADMIN_PASS`    | Admin Pass                                                                  | ``            | x     |
 | `CACHE_PATH`    | Data Directory                                                              | `/cache/`     |       |
 | `CONFIG_PATH`   | Configuration directory                                                     | `/config/`    |       |
+
 | `ENABLE_NGINX`  | Enable Nginx Frontend webserver                                             | `TRUE`        |       |
+| `ENABLE_CROSS_ORIGIN_CHECK` | Enable Cross Origin Checking for websockets - Danger if disabled! | `TRUE` |
 | `ESPHOME_USER`  | ESPHome User                                                                | `esphome`     |       |
 | `ESPHOME_GROUP` | ESPHome Group                                                               | `esphome`     |       |
 | `LISTEN_IP`     | Bind IP                                                                     | `0.0.0.0`     |       |
