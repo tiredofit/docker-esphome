@@ -13,6 +13,7 @@ ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.4.2"} \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
     NGINX_LOG_ACCESS_LOCATION=/logs/nginx \
     NGINX_LOG_ERROR_LOCATION=/logs/nginx \
+    NGINX_PROXY_BUFFERS="12 256k" \
     NGINX_WORKER_PROCESSES=1 \
     IMAGE_NAME="tiredofit/esphome" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-esphome"
