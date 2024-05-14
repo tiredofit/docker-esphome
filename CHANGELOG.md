@@ -1,3 +1,10 @@
+## 1.0.1 2024-05-14 <dave at tiredofit dot ca>
+
+   ### Added
+      - Force liberal proxy buffers when using nginx
+      - Add ability to disable cross origin check for websockets
+
+
 ## 1.0.0 2024-05-08 <dave at tiredofit dot ca>
 
    ### Added
