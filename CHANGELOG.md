@@ -1,3 +1,10 @@
+## 1.1.0 2024-05-18 <dave at tiredofit dot ca>
+
+   ### Added
+      - Switch to Debian Bookworm
+      - ESPHome 2024.05
+
+
 ## 1.0.1 2024-05-14 <dave at tiredofit dot ca>
 
    ### Added

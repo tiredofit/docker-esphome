@@ -1,12 +1,12 @@
-ARG DISTRO=alpine
-ARG DISTRO_VARIANT=3.19
+ARG DISTRO=debian
+ARG DISTRO_VARIANT=bookworm
 
 FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION
 
-ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.4.2"} \
+ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.5.0"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
     NGINX_SITE_ENABLED=esphome \
     NGINX_WEBROOT=/var/lib/nginx/wwwroot \
@@ -20,27 +20,32 @@ ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.4.2"} \
 
 RUN source /assets/functions/00-container && \
     set -x && \
-    addgroup -g 6052 esphome && \
-    adduser -S -D -G esphome -u 6052 -h /var/lib/esphome/ -H esphome && \
+    addgroup --gid 6052 esphome && \
+    adduser --uid 6052 \
+            --gid 6052 \
+            --gecos "ESPHome" \
+            --home /var/lib/esphome \
+            --shell /sbin/nologin \
+            --disabled-login \
+            --disabled-password \
+            esphome \
+            && \
     package update && \
     package upgrade && \
-    package install .esphome-build-deps \
-                    python3-dev \
-                    py3-pip \
-                    && \
-    package install .esphome-run-deps \
-                    gcompat \
+    package install \
+                    git \
                     python3 \
-                    py3-setuptools \
+                    python3-dev \
+                    python3-magic \
+                    python3-pip \
+                    python3-setuptools \
+                    python3-venv \
                     && \
     clone_git_repo "${ESPHOME_REPO_URL}" "${ESPHOME_VERSION}" /usr/src/esphome && \
     cd /usr/src/esphome && \
     pip install --break-system-packages -r requirements.txt && \
+    pip install --break-system-packages -r requirements_optional.txt && \
     /usr/src/esphome/setup.py install && \
-    \
-    package remove \
-                    .esphome-build-deps \
-                    && \
     package cleanup && \
     rm -rf \
             /root/.cache \

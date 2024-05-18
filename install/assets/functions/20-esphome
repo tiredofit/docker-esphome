@@ -35,7 +35,7 @@ configure_proxy() {
         if var_false "${ENABLE_CROSS_ORIGIN_CHECK}" ; then
             sed -i \
                     -e "s|return origin == host|return True|g" \
-                    /usr/lib/python$(python --version | awk '{print $2}' | cut -d . -f 1-2)/site-packages/tornado/websocket.py
+                    /usr/local/lib/python$(python3 --version | awk '{print $2}' | cut -d . -f 1-2)/dist-packages/tornado/websocket.py
         fi
 
     fi
