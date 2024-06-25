@@ -1,0 +1,13 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+
+prepare_service
+PROCESS_NAME="esphome"
+
+if [ "${CACHE_RETAIN,,}" = "runtime" ]; then
+    print_debug "Deleting cache"
+    rm -rf  \
+            "${CACHE_PATH}"/.cache \
+            "${CACHE_PATH}"/.platformio
+fi

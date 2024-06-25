@@ -6,7 +6,9 @@ prepare_service
 PROCESS_NAME="esphome"
 
 bootstrap_filesystem
+configure_cache
 configure_logging
 configure_proxy
+configure_settings
 
 liftoff

@@ -1,12 +1,14 @@
 services:
 
   esphome-app:
-    image: tiredofit/esphome:latest
+    image: tiredofit/esphome
     container_name: esphome-app
     labels:
       - traefik.enable=true
       - traefik.http.routers.esphome-app.rule=Host(`esphome.example.com`)
       - traefik.http.services.esphome-app.loadbalancer.server.port=80
+    ports:
+      - 6052:6052
     volumes:
       - ./cache:/cache
       - ./config:/config
