@@ -16,6 +16,46 @@ bootstrap_filesystem() {
     if [ "$(stat -c %U "${LOG_PATH}")" != "${ESPHOME_USER}" ] ; then chown -R "${ESPHOME_USER}":"${ESPHOME_GROUP}" "${LOG_PATH}" ; fi
 }
 
+configure_cache() {
+    touch "${CONFIG_PATH}"/.version
+    if [ ! -s "${CONFIG_PATH}"/.version ]; then
+        echo "${ESPHOME_VERSION} first installed on $(TZ=${TIMEZONE} date +'%Y-%m-%d %H:%M:%S %Z')" > "${CONFIG_PATH}".version
+    fi
+
+    esphome_run_major=$(echo "${ESPHOME_VERSION}" | cut -d . -f 1,2)
+    esphome_file_major="$(head -n 1 "${CONFIG_PATH}"/.version | awk '{print $1}' | cut -d . -f 1,2)"
+    if [ "${esphome_run_major}" != "${esphome_file_major}" ] ; then
+        print_debug "Cache files Major version: '${esphome_file_major}', but image runtime major version: '${esphome_run_major}'"
+        cache_delete=true
+        upgrade=true
+    fi
+
+    esphome_run_minor=$(echo "${ESPHOME_VERSION}" | cut -d . -f 1,2,3)
+    esphome_file_minor="$(head -n 1 "${CONFIG_PATH}"/.version | awk '{print $1}' | cut -d . -f 1,2,3)"
+    if [ "${esphome_run_minor}" != "${esphome_file_minor}" ] ; then
+        print_debug "Cache files Minor version: '${esphome_file_major}', but image runtime version: '${esphome_run_major}'"
+        cache_delete=true
+        upgrade=true
+    fi
+
+    case "${CACHE_RETAIN}" in
+        major | minor | runtime )
+            if var_true "${cache_delete}" || [ "${CACHE_RETAIN,,}" = "runtime" ]; then
+                print_debug "Deleting cache"
+                rm -rf  \
+                        "${CACHE_PATH}"/.cache \
+                        "${CACHE_PATH}"/.platformio
+            fi
+        ;;
+    esac
+
+    if var_true "${upgrade}" ; then
+        echo "${ESPHOME_VERSION} upgraded on $(TZ=${TIMEZONE} date +'%Y-%m-%d %H:%M:%S %Z')" | cat - "${CONFIG_PATH}"/.version > /tmp/.version && mv /tmp/.version "${CONFIG_PATH}"/.version
+    fi
+
+    chown -R root:root "${CONFIG_PATH}"/.version
+}
+
 configure_logging() {
     if [ "${LOG_TYPE,,}" = "file" ] || [ "${LOG_TYPE,,}" = "both" ]; then
         create_logrotate esphome "${LOG_PATH}"/"${LOG_FILE}" esphome "${ESPHOME_USER}" "${ESPHOME_GROUP}"
@@ -35,8 +75,14 @@ configure_proxy() {
         if var_false "${ENABLE_CROSS_ORIGIN_CHECK}" ; then
             sed -i \
                     -e "s|return origin == host|return True|g" \
-                    /usr/local/lib/python$(python3 --version | awk '{print $2}' | cut -d . -f 1-2)/dist-packages/tornado/websocket.py
+                    /usr/local/lib/python"$(python3 --version | awk '{print $2}' | cut -d . -f 1-2)"/dist-packages/tornado/websocket.py
         fi
 
     fi
+}
+
+configure_settings() {
+    silent sudo -u "${ESPHOME_USER}" git config --global advice.detachedHead false
+    silent sudo -u "${ESPHOME_USER}" platformio settings set enable_telemetry No
+    silent sudo -u "${ESPHOME_USER}" platformio settings set check_platformio_interval 1000000
 }

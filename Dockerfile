@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION
 
-ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.5.0"} \
+ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.6.1"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
     NGINX_SITE_ENABLED=esphome \
     NGINX_WEBROOT=/var/lib/nginx/wwwroot \
@@ -33,7 +33,11 @@ RUN source /assets/functions/00-container && \
     package update && \
     package upgrade && \
     package install \
+                    build-essential \
                     git \
+                    clang-format \
+                    clang-tidy \
+                    patch \
                     python3 \
                     python3-dev \
                     python3-magic \
@@ -41,15 +45,19 @@ RUN source /assets/functions/00-container && \
                     python3-setuptools \
                     python3-venv \
                     && \
-    clone_git_repo "${ESPHOME_REPO_URL}" "${ESPHOME_VERSION}" /usr/src/esphome && \
-    cd /usr/src/esphome && \
-    pip install --break-system-packages -r requirements.txt && \
-    pip install --break-system-packages -r requirements_optional.txt && \
-    /usr/src/esphome/setup.py install && \
+    \
+    clone_git_repo "${ESPHOME_REPO_URL}" "${ESPHOME_VERSION}" /opt/esphome && \
+    cd /opt/esphome && \
+    pip install \
+                --break-system-packages \
+                -r requirements.txt \
+                -r requirements_optional.txt \
+                -e /opt/esphome \
+                && \
     package cleanup && \
     rm -rf \
             /root/.cache \
-            /usr/src/esphome \
+            /usr/src/* \
             /var/lib/esphome
 
 ADD install/ /

@@ -1,3 +1,11 @@
+## 1.2.0 2024-06-24 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add CACHE_RETAIN environment variable to delete cache on container start/end, on minor point release upgrade or major YYYY.MM releases, or indefinitely
+      - Fix some build issues
+      - Quiet down some platformIO and git settings
+
+
 ## 1.1.0 2024-05-18 <dave at tiredofit dot ca>
 
    ### Added

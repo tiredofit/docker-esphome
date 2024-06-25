@@ -83,7 +83,7 @@ The following directories are used for configuration and can be mapped for persi
 
 | Directory  | Description          |
 | ---------- | -------------------- |
-| `/cache/`   | Data                |
+| `/cache/`  | Data                 |
 | `/config/` | Configuration folder |
 | `/logs`    | Logs                 |
 
@@ -104,24 +104,26 @@ Be sure to view the following repositories to understand all the customizable op
 
 
 #### Container Options
-| Variable        | Value                                                                       | Default       | _FILE |
-| --------------- | --------------------------------------------------------------------------- | ------------- | ----- |
-| `ADMIN_USER`    | Admin User                                                                  | ``            | x     |
-| `ADMIN_PASS`    | Admin Pass                                                                  | ``            | x     |
-| `CACHE_PATH`    | Data Directory                                                              | `/cache/`     |       |
-| `CONFIG_PATH`   | Configuration directory                                                     | `/config/`    |       |
 
-| `ENABLE_NGINX`  | Enable Nginx Frontend webserver                                             | `TRUE`        |       |
-| `ENABLE_CROSS_ORIGIN_CHECK` | Enable Cross Origin Checking for websockets - Danger if disabled! | `TRUE` |
-| `ESPHOME_USER`  | ESPHome User                                                                | `esphome`     |       |
-| `ESPHOME_GROUP` | ESPHome Group                                                               | `esphome`     |       |
-| `LISTEN_IP`     | Bind IP                                                                     | `0.0.0.0`     |       |
-| `LISTEN_PORT`   | Listening Port                                                              | `6052`        |       |
-| `LOG_PATH`      | Log Path                                                                    | `/logs/`      |       |
-| `LOG_FILE`      | Log File                                                                    | `esphome.log` |       |
-| `LOG_TYPE`      | `console` `file` `both` `none`                                              | `FILE`        |       |
-| `PROXY_PORT`    | When using `ENABLE_NGINX` it may be required to set your origin port        | `443`         |       |
-|                 | aka what PORT your system is connecting to the proxy, usually `80` or `443` |               |       |
+| Variable                    | Value                                                                       | Default       | _FILE |
+| --------------------------- | --------------------------------------------------------------------------- | ------------- | ----- |
+| `ADMIN_USER`                | Admin User                                                                  | ``            | x     |
+| `ADMIN_PASS`                | Admin Pass                                                                  | ``            | x     |
+| `CACHE_PATH`                | Cache Directory                                                             | `/cache/`     |       |
+| `CACHE_RETAIN`              | Retain Cache `forever` each container `runtime` boot, thru `minor`          | `major`       |       |
+|                             | versions or through `major` versions.                                       |               |       |
+| `CONFIG_PATH`               | Configuration directory                                                     | `/config/`    |       |
+| `ENABLE_NGINX`              | Enable Nginx Frontend webserver                                             | `TRUE`        |       |
+| `ENABLE_CROSS_ORIGIN_CHECK` | Enable Cross Origin Checking for websockets - Danger if disabled!           | `TRUE`        |       |
+| `ESPHOME_USER`              | ESPHome User                                                                | `esphome`     |       |
+| `ESPHOME_GROUP`             | ESPHome Group                                                               | `esphome`     |       |
+| `LISTEN_IP`                 | Bind IP                                                                     | `0.0.0.0`     |       |
+| `LISTEN_PORT`               | Listening Port                                                              | `6052`        |       |
+| `LOG_PATH`                  | Log Path                                                                    | `/logs/`      |       |
+| `LOG_FILE`                  | Log File                                                                    | `esphome.log` |       |
+| `LOG_TYPE`                  | `console` `file` `both` `none`                                              | `FILE`        |       |
+| `PROXY_PORT`                | When using `ENABLE_NGINX` it may be required to set your origin port        | `443`         |       |
+|                             | aka what PORT your system is connecting to the proxy, usually `80` or `443` |               |       |
 
 ### Networking
 
