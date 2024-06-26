@@ -1,3 +1,9 @@
+## 1.3.0 2024-06-26 <dave at tiredofit dot ca>
+
+   ### Added
+      - Switch to using Virtual Environments for Python
+
+
 ## 1.2.0 2024-06-24 <dave at tiredofit dot ca>
 
    ### Added

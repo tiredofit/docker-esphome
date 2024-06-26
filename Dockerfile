@@ -8,6 +8,9 @@ ARG ESPHOME_VERSION
 
 ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.6.1"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
+    ESPHOME_USER=${ESPHOME_USER:-"esphome"} \
+    ESPHOME_GROUP=${ESPHOME_GROUP:-"esphome"} \
+    PATH="/opt/esphome/bin:$PATH" \
     NGINX_SITE_ENABLED=esphome \
     NGINX_WEBROOT=/var/lib/nginx/wwwroot \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
@@ -46,13 +49,14 @@ RUN source /assets/functions/00-container && \
                     python3-venv \
                     && \
     \
-    clone_git_repo "${ESPHOME_REPO_URL}" "${ESPHOME_VERSION}" /opt/esphome && \
-    cd /opt/esphome && \
-    pip install \
-                --break-system-packages \
+    python3 -m venv /opt/esphome && \
+    clone_git_repo "${ESPHOME_REPO_URL}" "${ESPHOME_VERSION}" /opt/esphome/app && \
+    chown -R "${ESPHOME_USER}":"${ESPHOME_GROUP}" /opt/esphome && \
+    cd /opt/esphome/app && \
+    sudo -u "${ESPHOME_USER}" /opt/esphome/bin/pip install \
                 -r requirements.txt \
                 -r requirements_optional.txt \
-                -e /opt/esphome \
+                -e /opt/esphome/app \
                 && \
     package cleanup && \
     rm -rf \

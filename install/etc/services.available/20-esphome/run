@@ -36,9 +36,9 @@ esac
 
 liftoff
 print_start "Starting ESPHome ${ESPHOME_VERSION}"
-sudo -u "${ESPHOME_USER}" \
+s6-setuidgid "${ESPHOME_USER}" \
                                 esphome \
-                                        dashboard \
-                                        --address "${LISTEN_IP}" \
-                                        --port "${LISTEN_PORT}" \
-                                        ${_esphome_admin_credentials} "${CONFIG_PATH}" 2>&1 1>> "${LOG_PATH}"/"${LOG_FILE}"|  silent sudo -u esphome tee -a "${LOG_PATH}"/"${LOG_FILE}"
+                                    dashboard \
+                                    --address "${LISTEN_IP}" \
+                                    --port "${LISTEN_PORT}" \
+                                    ${_esphome_admin_credentials} "${CONFIG_PATH}" 2>&1 1>> "${LOG_PATH}"/"${LOG_FILE}" |  silent sudo -u esphome tee -a "${LOG_PATH}"/"${LOG_FILE}"
