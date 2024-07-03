@@ -36,8 +36,8 @@ esac
 
 liftoff
 print_start "Starting ESPHome ${ESPHOME_VERSION}"
-s6-setuidgid "${ESPHOME_USER}" \
-                                esphome \
+s6-setuidgid "${ESPHOME_USER}"source /opt/esphome/bin/activate ;
+s6-setuidgid "${ESPHOME_USER}" esphome \
                                     dashboard \
                                     --address "${LISTEN_IP}" \
                                     --port "${LISTEN_PORT}" \

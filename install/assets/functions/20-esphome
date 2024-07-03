@@ -3,7 +3,7 @@ bootstrap_filesystem() {
         mkdir -p "${CACHE_PATH}"
     fi
     if [ "$(stat -c %U "${CACHE_PATH}")" != "${ESPHOME_USER}" ] ; then chown "${ESPHOME_USER}":"${ESPHOME_GROUP}" "${CACHE_PATH}" ; fi
-    ln -sf "${CACHE_PATH}" /var/lib/esphome
+    ln -sf "${CACHE_PATH%/}" /var/lib/esphome
 
     if [ ! -d "${CONFIG_PATH}" ]; then
         mkdir -p "${CONFIG_PATH}"
