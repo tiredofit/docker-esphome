@@ -1,3 +1,13 @@
+## 1.3.2 2024-07-03 <dave at tiredofit dot ca>
+
+   ### Added
+      - ESPHome 2024.6.6
+
+   ### Changed
+      - Fix Cache Symbolic Link
+      - Adjust user permissions to properly save cache
+
+
 ## 1.3.1 2024-07-02 <dave at tiredofit dot ca>
 
    ### Added

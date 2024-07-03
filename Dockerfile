@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION
 
-ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.6.4"} \
+ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.6.6"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
     ESPHOME_USER=${ESPHOME_USER:-"esphome"} \
     ESPHOME_GROUP=${ESPHOME_GROUP:-"esphome"} \
@@ -28,7 +28,7 @@ RUN source /assets/functions/00-container && \
             --gid 6052 \
             --gecos "ESPHome" \
             --home /var/lib/esphome \
-            --shell /sbin/nologin \
+            --shell /bin/bash \
             --disabled-login \
             --disabled-password \
             esphome \
