@@ -1,3 +1,9 @@
+## 1.3.10 2024-09-02 <dave at tiredofit dot ca>
+
+   ### Added
+      - ESPHome 2024.8.3
+
+
 ## 1.3.9 2024-09-02 <dave at tiredofit dot ca>
 
    ### Added
