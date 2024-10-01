@@ -1,7 +1,7 @@
 ARG DISTRO=debian
 ARG DISTRO_VARIANT=bookworm
 
-FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}:6.5.2
+FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION

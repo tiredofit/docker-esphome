@@ -1,3 +1,9 @@
+## 1.3.14 2024-10-01 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Revert pinning. No such thing as that debian pin
+
+
 ## 1.3.13 2024-10-01 <dave at tiredofit dot ca>
 
    ### Added
