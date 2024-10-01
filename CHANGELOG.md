@@ -1,3 +1,10 @@
+## 1.3.13 2024-10-01 <dave at tiredofit dot ca>
+
+   ### Added
+      - ESPHome 2024.9.2
+      - Pin to tiredofit/nginx:alpine-3.2.0-7.5.2
+
+
 ## 1.3.12 2024-09-22 <dave at tiredofit dot ca>
 
    ### Added

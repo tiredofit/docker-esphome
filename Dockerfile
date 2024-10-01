@@ -1,12 +1,12 @@
 ARG DISTRO=debian
 ARG DISTRO_VARIANT=bookworm
 
-FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}
+FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VARIANT}:6.5.2
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION
 
-ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.9.1"} \
+ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2024.9.2"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
     ESPHOME_USER=${ESPHOME_USER:-"esphome"} \
     ESPHOME_GROUP=${ESPHOME_GROUP:-"esphome"} \
