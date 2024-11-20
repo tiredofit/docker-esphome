@@ -1,7 +1,7 @@
 ## 1.3.19 2024-11-20 <dave at tiredofit dot ca>
 
    ### Added
-      - Traefik 3.2.1
+      - ESPHome 2024.11.0
 
 
 ## 1.3.18 2024-11-08 <dave at tiredofit dot ca>
