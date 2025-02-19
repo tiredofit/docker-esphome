@@ -1,3 +1,9 @@
+## 1.3.28 2025-02-19 <dave at tiredofit dot ca>
+
+   ### Added
+      - 2025.2.0
+
+
 ## 1.3.27 2025-01-16 <dave at tiredofit dot ca>
 
    ### Added
