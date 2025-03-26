@@ -1,3 +1,9 @@
+## 1.3.32 2025-03-25 <dave at tiredofit dot ca>
+
+   ### Added
+      - ESPHome 2025.3.2
+
+
 ## 1.3.31 2025-03-21 <dave at tiredofit dot ca>
 
    ### Added
