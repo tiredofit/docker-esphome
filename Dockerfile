@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG ESPHOME_VERSION
 
-ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2025.5.1"} \
+ENV ESPHOME_VERSION=${ESPHOME_VERSION:-"2025.5.2"} \
     ESPHOME_REPO_URL=https://github.com/esphome/esphome \
     ESPHOME_USER=${ESPHOME_USER:-"esphome"} \
     ESPHOME_GROUP=${ESPHOME_GROUP:-"esphome"} \
