@@ -55,7 +55,7 @@ RUN source /assets/functions/00-container && \
     cd /opt/esphome/app && \
     sudo -u "${ESPHOME_USER}" /opt/esphome/bin/pip install \
                 -r requirements.txt \
-                -r requirements_optional.txt \
+                #-r requirements_optional.txt \
                 -e /opt/esphome/app \
                 && \
     package cleanup && \

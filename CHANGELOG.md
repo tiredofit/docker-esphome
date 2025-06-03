@@ -1,3 +1,9 @@
+## 1.3.40 2025-06-03 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix build issues
+
+
 ## 1.3.39 2025-06-03 <dave at tiredofit dot ca>
 
    ### Added
