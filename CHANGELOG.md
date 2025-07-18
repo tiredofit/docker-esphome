@@ -1,3 +1,9 @@
+## 1.3.47 2025-07-18 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix startup issue
+
+
 ## 1.3.46 2025-07-17 <dave at tiredofit dot ca>
 
    ### Added

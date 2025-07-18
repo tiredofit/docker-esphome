@@ -36,7 +36,7 @@ esac
 
 liftoff
 print_start "Starting ESPHome ${ESPHOME_VERSION}"
-su "${ESPHOME_USER}" -c "python3
+su "${ESPHOME_USER}" -c "python3 \
                             -m venv /opt/esphome"
 su "${ESPHOME_USER}" -c "esphome \
                             dashboard \
